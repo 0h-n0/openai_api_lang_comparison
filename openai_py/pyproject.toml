@@ -1,6 +1,7 @@
 [tool.poetry]
 name = "openai-py"
 version = "0.1.0"
+authors = ""
 description = ""
 readme = "README.md"
 packages = [{include = "openai_py"}]

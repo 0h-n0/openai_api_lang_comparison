@@ -1,12 +1,13 @@
 ### OPENAI_API Comparison
 
 
-|Lang|Curl|Rust|Python|Javascript(Node)|Go|
-|--:|--:|--:|--:|--:|--:|--:|
-|Mean|1.673s|1.672s|2.330s|1.907s|1.729s|
-|Std|± 0.249s|± 0.257|± 0.387s|± 0.754s|± 0.265s|
-|Max|2.156s|2.522s|3.427s|4.116s|2.468s|
-|Min|1.328s|1.418s|1.838s|0.867s|1.358|
+|Lang|Curl|Rust|Python|Javascript(Node)|Go|AWS Lambda + Python|
+|--:|--:|--:|--:|--:|--:|--:|--:|
+|Mean|1.673s|1.672s|2.330s|1.907s|1.729s|1.626|
+|Std|± 0.249s|± 0.257|± 0.387s|± 0.754s|± 0.265s|± 0.350s|
+|Max|2.156s|2.522s|3.427s|4.116s|2.468s|3.036s|
+|Min|1.328s|1.418s|1.838s|0.867s|1.358|1.261s|
+
 > * 30 trials per language.
 > * use Hyperfine
 
@@ -88,4 +89,13 @@ $ hyperfine -i --warmup 5 -m 30 'node main.js'
   Benchmark 1: node main.js
   Time (mean ± σ):      1.907 s ±  0.754 s    [User: 0.075 s, System: 0.010 s]
   Range (min … max):    0.867 s …  4.116 s    30 runs
+```
+
+# AWS Lambda + Python3.10
+
+The codes are not provided yet
+```shell
+$ Benchmark 1: bash lambda.sh
+  Time (mean ± σ):      1.626 s ±  0.350 s    [User: 0.009 s, System: 0.002 s]
+  Range (min … max):    1.261 s …  3.036 s    30 runs
 ```
