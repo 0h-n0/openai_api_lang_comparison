@@ -89,7 +89,6 @@ $ hyperfine -i --warmup 5 -m 30 'node main.js'
   Time (mean ± σ):      1.907 s ±  0.754 s    [User: 0.075 s, System: 0.010 s]
   Range (min … max):    0.867 s …  4.116 s    30 runs
 ```
-<<<<<<< HEAD
 
 # AWS Lambda + Python3.10
 
@@ -99,5 +98,4 @@ $ Benchmark 1: bash lambda.sh
   Time (mean ± σ):      1.626 s ±  0.350 s    [User: 0.009 s, System: 0.002 s]
   Range (min … max):    1.261 s …  3.036 s    30 runs
 ```
-=======
->>>>>>> dec4626ba370358b070dbe783eb97b67bfd94980
+
