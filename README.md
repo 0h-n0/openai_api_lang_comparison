@@ -1,4 +1,4 @@
-### OPENAI_API Comparison
+### OPENAI_API Comparison(gpt35t)
 
 
 |Lang|Curl|Rust|Python|Javascript(Node)|Go|AWS Lambda + Python|
@@ -7,9 +7,44 @@
 |Std|± 0.249s|± 0.257|± 0.387s|± 0.754s|± 0.265s|± 0.350s|
 |Max|2.156s|2.522s|3.427s|4.116s|2.468s|3.036s|
 |Min|1.328s|1.418s|1.838s|0.867s|1.358|1.261s|
+
+
+### Azure_OPENAI_API Comparison
+
+2023/11/14
+
+|Lang|Curl(gpt35t)|Rust|Python(gpt4)|Python(gpt35t16k)|Javascript(Node)|Go|AWS Lambda + Python|
+|--:|--:|--:|--:|--:|--:|--:|--:|
+|Mean|79.9ms|s|2.198s|1.019s|s|s|s|
+|Std|± 10.4ms|± s|± 1.366s|± 0.327s|± s|± s|± s|
+|Max|139.5ms|s|5.289s|2.073s|s|s|s|
+|Min|70.5ms|s|1.073s|0.327s|s|s|s|
+
+
+
 > * 30 trials per language.
 > * use Hyperfine
 
+# Azure OPENAI API
+
+```shell
+$ curl https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments/gpt35t16k/chat/completions?api-version=2023-07-01-preview \
+  -H "Content-Type: application/json" \
+  -H "api-key: $AZURE_OPENAI_API_KEY" \
+  -d '{
+     "model": "gpt35",
+     "messages": [{"role": "user", "content": "hello"}],
+     "temperature": 0.0,
+     "max_tokens": 800,
+     "frequency_penalty": 0.0,
+     "presence_penalty": 0.0,
+     "top_p": 1.0,
+     "stop": null
+   }'
+```
+
+
+# OpenAI API
 
 ```shell
 $ curl https://api.openai.com/v1/chat/completions \ 
@@ -18,19 +53,19 @@ $ curl https://api.openai.com/v1/chat/completions \
   -d '{
      "model": "gpt-3.5-turbo",
      "messages": [{"role": "user", "content": "hello"}],
-     "temperature": 0.0
+     "temperature": 0.0,
    }'
 ```
 
 
-# Curl
+## Curl
 ```shell
 $ curl --version                            
 curl 7.68.0 (x86_64-pc-linux-gnu)
 ```
 
 ```bash
-$ hyperfine -i --warmup 5 -m 'bash ./native.sh'
+$ hyperfine -i --warmup 5 -m 30 'bash ./native.sh'
   Benchmark 1: bash ./native.sh
   Time (mean ± σ):      1.673 s ±  0.249 s    [User: 0.008 s, System: 0.004 s]
   Range (min … max):    1.328 s …  2.156 s    30 runs  
